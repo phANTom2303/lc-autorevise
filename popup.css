@@ -1,0 +1,20 @@
+/* popup.css */
+body {
+  font-family: Arial, sans-serif;
+  min-width: 200px;
+  padding: 10px;
+}
+#app h2 {
+  margin-top: 0;
+}
+button {
+  background: #ffa116;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover {
+  background: #e69a0b;
+}
