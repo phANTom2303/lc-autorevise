@@ -40,7 +40,10 @@
     const originalFetch = window.fetch;
     if (originalFetch) {
         window.fetch = async function (...args) {
+            //args : arguments of fetch funciton
             const [res, init] = args;
+            //res : resource(URL or request object)
+            //init: request configuration like method, headers, body etc.
             const url = (typeof res === 'string') ? res : (res && res.url) || '';
             let response = await originalFetch.apply(this, args);
             try {
@@ -62,6 +65,7 @@
     }
 
     // ---- XHR interception ----
+    //TODO:understand this XHR interception code
     const XHR = window.XMLHttpRequest;
     if (XHR) {
         const originalOpen = XHR.prototype.open;
