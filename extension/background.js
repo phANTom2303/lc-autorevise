@@ -3,5 +3,5 @@
 // Add logic here for alarms, messaging, etc.
 
 chrome.runtime.onInstalled.addListener(() => {
-  console.log('LeetCode Helper extension installed.');
+  console.log('LeetCode AutoRevise extension installed.');
 });
