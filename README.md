@@ -43,3 +43,36 @@ An extension and service that aims to capture your leetcode submission data in t
 A simple server to store and manage data using MongoDB. Process it according to the flow below and show it to the user in the extension's UI itself.
 
 ![MVP architecture and processing logic](image.png)
+
+## Development (React Sidepanel)
+
+The sidepanel has been migrated to a React app (Vite) located in `extension/ui`.
+
+Workflow:
+
+1. Install deps:
+    ```bash
+    cd extension/ui
+    npm install
+    ```
+2. Develop (hot reload in browser via normal extension reload still required):
+    ```bash
+    npm run dev
+    ```
+    This serves the UI separately (not loaded by the extension). Use it for rapid iteration, then build.
+3. Build & sync into extension root:
+    ```bash
+    npm run build
+    ```
+    This outputs production assets and copies them into `extension/sidepanel.html` plus `extension/sidepanel_assets/`.
+4. Reload the extension in Chrome (chrome://extensions) to see updates.
+
+Notes:
+* The built `sidepanel.html` is produced by Vite; edit React code then rebuild.
+* Legacy files (`sidepanel.js`, `sidepanel.css`) were removed after React migration.
+* Messaging & storage access work the same via the Chrome Extension APIs inside React components.
+
+## Future Improvements
+* Add state management (e.g. Zustand) for problem tracking.
+* Add revision scheduling visualization.
+* Add options page for configuration.
