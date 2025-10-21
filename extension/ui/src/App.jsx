@@ -5,7 +5,7 @@ export default function App() {
 
     return (
         <div className={styles.bgcolour}>
-            Hello from LC AutoRev!
+            Hello from LC AutoRev! Testing React here.
         </div>
     );
 }

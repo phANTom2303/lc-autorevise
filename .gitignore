@@ -1,3 +1,9 @@
 node_modules
 .vscode
 /extension/ui/dist
+
+# Environment configuration (contains API URLs and usernames)
+extension/env.js
+
+# Build artifacts
+*.zip

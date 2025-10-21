@@ -6,6 +6,12 @@
     if (window.__leetcodeHelperInterceptInstalled) return;
     window.__leetcodeHelperInterceptInstalled = true;
 
+    // Read configuration from env.js (loaded before this script)
+    const CONFIG = window.__LC_AUTOREVISE_CONFIG || {
+        API_URL: 'http://localhost:3000',  // Fallback defaults
+        USERNAME: 'testUser'
+    };
+
     const CHECK_MATCH = /\/check(?![A-Za-z0-9_])/; // matches '/check' path segments
     const nowISO = () => new Date().toISOString();
 
@@ -33,6 +39,23 @@
                 } : null,
                 raw: data
             });
+            // Send to backend
+            if (data && typeof data === 'object' && data.submission_id) {
+                fetch(`${CONFIG.API_URL}/submissions`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: CONFIG.USERNAME,
+                        submissionData: data
+                    })
+                }).then(r => r.json()).then(resp => {
+                    console.log('[LC-Autorevise] Submission POST response:', resp);
+                }).catch(err => {
+                    console.error('[LC-Autorevise] Submission POST error:', err);
+                });
+            }
         } catch (_) { }
     };
 
