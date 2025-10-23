@@ -2,34 +2,26 @@ const { Router } = require('express');
 const submissionRouter = Router();
 const User = require('../models/userModel');
 const Submission = require('../models/submissionModel');
-const UserSubmission = require('../models/userSubmissionModel');
 
 
 submissionRouter.post('/', async (req, res) => {
     try {
-        const { username, submissionData } = req.body;
+        const submissionData = req.body;
 
         // Create or find user
-        let user = await User.findOne({ username });
+        let user = await User.findOne({ username: submissionData.username });
         if (!user) {
-            user = await User.create({ username });
+            user = await User.create({ username: submissionData.username });
         }
 
         // Create submission
         const submission = await Submission.create(submissionData);
 
-        // Link user and submission
-        const userSubmission = await UserSubmission.create({
-            username: user.username,
-            submission_id: submission.submission_id
-        });
-
         res.status(201).json({
             success: true,
             data: {
                 user,
-                submission,
-                userSubmission
+                submission
             }
         });
     } catch (error) {

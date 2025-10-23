@@ -41,15 +41,14 @@
             });
             // Send to backend
             if (data && typeof data === 'object' && data.submission_id) {
+                // Attach username to submissionData for backend
+                data.username = CONFIG.USERNAME;
                 fetch(`${CONFIG.API_URL}/submissions`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({
-                        username: CONFIG.USERNAME,
-                        submissionData: data
-                    })
+                    body: JSON.stringify(data)
                 }).then(r => r.json()).then(resp => {
                     console.log('[LC-Autorevise] Submission POST response:', resp);
                 }).catch(err => {

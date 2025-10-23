@@ -5,6 +5,10 @@ const submissionSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    username: {
+        type: String,
+        required: true
+    },
     status_code: Number,
     lang: String,
     run_success: Boolean,

@@ -5,13 +5,14 @@ const { mongoose } = require('mongoose');
 const { displayLeetcodeUser } = require('./leetcode.js');
 const cors = require('cors');
 const submissionRouter = require('./routes/submissionRoutes.js');
+const problemRouter = require('./routes/problemRoutes.js');
 
 mongoose.connect("mongodb://127.0.0.1:27017/lc-autorevise")
     .then(console.log("mongoDB Connected"))
     .catch((err) => console.log(err));
 // Middleware
 app.use(cors({
-    
+
 }))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -23,6 +24,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/submissions', submissionRouter);
+app.use('/problems', problemRouter);
 
 // Start server
 app.listen(PORT, () => {
